@@ -6,12 +6,14 @@ import {AppComponent} from "./components/app/app.component";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { HotbitsComponent } from './components/hotbits/hotbits.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HotbitsComponent,
-    DashboardComponent
+    DashboardComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,

@@ -4,4 +4,11 @@
 
 .activeLink {
   color: #a1ffcd;
+  font-weight: bolder;
 }
+
+.inactiveLink {
+  color: #6aa185;
+}
+
+li { cursor: pointer; }

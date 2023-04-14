@@ -29,7 +29,8 @@ export class AppComponent {
 
   private getLinks():Link[] {
     return [
-      new Link("DASHBOARD", true)
+      new Link("DASHBOARD", true),
+      new Link("UPLOAD", true)
     ]
   }
 

@@ -6,8 +6,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" *ngFor="let link of links">
-          <a class="nav-link pointer" [class.activeLink]="link.active" (click)="navigate(link.title)">{{link.title}}</a>
+        <li class="nav-item pointer" *ngFor="let link of links">
+          <a class="nav-link pointer" [class.activeLink]="link.active" [class.inactiveLink]="!link.active" (click)="navigate(link.title)">{{link.title}}</a>
         </li>
       </ul>
     </div>
