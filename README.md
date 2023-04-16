@@ -1,6 +1,8 @@
 # radionics
 Online Radionics for everyone
 
+![alt text](ui/src/assets/images/radionics1.jpg "Title")
+
 ## Build
 ````shell
  ng build --base-href radionics

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AnalyzeService} from "../../services/analyze.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  randomImage:number = 1;
+
+  constructor(private analyzeService:AnalyzeService) { }
 
   ngOnInit(): void {
+    this.randomImage = this.analyzeService.getRandomNumber(8) + 1;
   }
 
 }

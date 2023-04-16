@@ -16,6 +16,12 @@ export class AnalyzeService {
    * Consuming hotbits for quantum influence
    */
   private getRnd() {
-    return seedrandom(this.randomNumberService.hotbits.shift() + new Date().getMilliseconds());
+    let hotbitNumber = new Date().getMilliseconds()
+
+    if (this.randomNumberService.hotbits.length > 10) {
+      hotbitNumber += this.randomNumberService.hotbits.shift();
+    }
+
+    return seedrandom(hotbitNumber);
   }
 }
