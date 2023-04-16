@@ -7,13 +7,15 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { HotbitsComponent } from './components/hotbits/hotbits.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HotbitsComponent,
     DashboardComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

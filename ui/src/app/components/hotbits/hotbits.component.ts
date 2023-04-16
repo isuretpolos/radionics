@@ -51,7 +51,6 @@ export class HotbitsComponent implements OnInit {
       const randomInt = Math.floor(randomValue * Number.MAX_SAFE_INTEGER);
 
       if (i == 0 && this.lastRandomNumber == randomInt) {
-        //console.log(`lastRandomNumber = ${this.lastRandomNumber} | randomInt = ${randomInt}`)
         break;
       }
 

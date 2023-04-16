@@ -11,7 +11,6 @@ export class RandomNumberService {
   }
 
   async addHotbits(randomNumbers:number[]) {
-    console.log(this.hotbits.length)
     if (this.hotbits.length < 50000) {
       this.hotbits.push.apply(this.hotbits, randomNumbers);
     }
