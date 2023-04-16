@@ -8,6 +8,7 @@ import { HotbitsComponent } from './components/hotbits/hotbits.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { TestComponent } from './components/test/test.component';
+import { DisclaimerComponent } from './components/disclaimer/disclaimer.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TestComponent } from './components/test/test.component';
     HotbitsComponent,
     DashboardComponent,
     FileUploadComponent,
-    TestComponent
+    TestComponent,
+    DisclaimerComponent
   ],
   imports: [
     BrowserModule,
