@@ -23,12 +23,13 @@ export class HotbitsComponent implements OnInit {
   }
 
   private async setupWebcam() {
+    document.querySelector('canvas').style.display="none";
+    document.querySelector('video').style.display="none";
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     this.videoElement.nativeElement.srcObject = stream;
     this.videoElement.nativeElement.play();
     this.updateCanvas();
-    document.querySelector('canvas').style.display="none";
-    document.querySelector('video').style.display="none";
+
   }
 
   private updateCanvas() {
@@ -58,7 +59,9 @@ export class HotbitsComponent implements OnInit {
         this.lastRandomNumber = randomInt;
       }
 
-      randomNumbers.push(randomInt);
+      if (randomInt > 0) {
+        randomNumbers.push(randomInt);
+      }
     }
 
     this.randomNumbersService.addHotbits(randomNumbers);
