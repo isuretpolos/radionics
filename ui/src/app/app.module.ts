@@ -11,6 +11,7 @@ import { TestComponent } from './components/test/test.component';
 import { DisclaimerComponent } from './components/disclaimer/disclaimer.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
+import { AnalyzeComponent } from './components/analyze/analyze.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DocumentationComponent } from './components/documentation/documentation
     TestComponent,
     DisclaimerComponent,
     SettingsComponent,
-    DocumentationComponent
+    DocumentationComponent,
+    AnalyzeComponent
   ],
   imports: [
     BrowserModule,

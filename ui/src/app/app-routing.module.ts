@@ -5,10 +5,12 @@ import {FileUploadComponent} from "./components/file-upload/file-upload.componen
 import {HttpClientModule} from "@angular/common/http";
 import {TestComponent} from "./components/test/test.component";
 import {SettingsComponent} from "./components/settings/settings.component";
+import {AnalyzeComponent} from "./components/analyze/analyze.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'DASHBOARD', pathMatch: 'full'},
   {path: 'DASHBOARD', component:DashboardComponent},
+  {path: 'ANALYSIS', component:AnalyzeComponent},
   {path: 'UPLOAD', component:FileUploadComponent},
   {path: 'TEST', component:TestComponent},
   {path: 'SETTINGS', component:SettingsComponent},

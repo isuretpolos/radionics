@@ -30,9 +30,10 @@ export class AppComponent {
   private getLinks():Link[] {
     return [
       new Link("DASHBOARD", true),
-      new Link("UPLOAD", true),
-      new Link("TEST", true),
-      new Link("SETTINGS", true)
+      new Link("ANALYSIS", false),
+      new Link("UPLOAD", false),
+      new Link("TEST", false),
+      new Link("SETTINGS", false)
     ]
   }
 

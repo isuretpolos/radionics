@@ -17,7 +17,7 @@ export class RandomNumberService {
   }
 
   async addHotbits(randomNumbers:number[]) {
-    if (this.hotbits.length < 50000) {
+    if (this.hotbits.length < 90000) {
       this.hotbits.push.apply(this.hotbits, randomNumbers);
     }
   }
