@@ -12,6 +12,7 @@ import { DisclaimerComponent } from './components/disclaimer/disclaimer.componen
 import { SettingsComponent } from './components/settings/settings.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { AnalyzeComponent } from './components/analyze/analyze.component';
+import {NgChartsModule} from "ng2-charts";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AnalyzeComponent } from './components/analyze/analyze.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgChartsModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

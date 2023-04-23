@@ -38,9 +38,9 @@ export class AnalyzeService {
         rates = this.shuffleRateList(rates);
 
         let max = 1000;
-        let highestEnergeticValue = 0;
+        let analysisResult = new AnalysisResult();
 
-        while (highestEnergeticValue < max) {
+        while (analysisResult.maxEV < max) {
 
           if (this.randomNumberService.hotbits.length < 10000) {
             console.log(`delay ...  ${this.randomNumberService.hotbits.length}`)
@@ -52,18 +52,34 @@ export class AnalyzeService {
                 await this.delay(1000);
               }
               rate.energeticValue += this.getRandomNumber(10);
-              if (rate.energeticValue > highestEnergeticValue) {
-                highestEnergeticValue = rate.energeticValue
+              if (rate.energeticValue > analysisResult.maxEV) {
+                analysisResult.maxEV = rate.energeticValue
               }
             }
           }
         }
 
-        let analysisResult = new AnalysisResult();
         analysisResult.gv = this.checkGeneralVitalityValue()
         rates.sort((a, b) => b.energeticValue - a.energeticValue);
         analysisResult.rates = rates.slice(0, 20);
-        analysisResult.rates.forEach(rate => rate.gv = this.checkGeneralVitalityValue())
+        analysisResult.rates.forEach(rate => {
+          rate.gv = this.checkGeneralVitalityValue()
+          if (analysisResult.minGV == 0) {
+            analysisResult.minGV = rate.gv
+          }
+          if (analysisResult.minGV > rate.gv) {
+            analysisResult.minGV = rate.gv
+          }
+          if (rate.gv > analysisResult.maxGV) {
+            analysisResult.maxGV = rate.gv
+          }
+          if (analysisResult.minEV == 0) {
+            analysisResult.minEV = rate.energeticValue
+          }
+          if (analysisResult.minEV > rate.energeticValue) {
+            analysisResult.minEV = rate.energeticValue
+          }
+        })
         observer.next(analysisResult)
       })
 
