@@ -1,15 +1,17 @@
 <button class="btn btn-primary" (click)="analyze()">ANALYZE</button>
 <button class="btn btn-primary" (click)="checkGeneralVitality()">GV {{gv}}</button>
 <span *ngIf="analyzing" class="badge badge-primary">analyzing ... please wait</span>
-<table *ngIf="analysisResult" class="table table-dark table-striped-columns table-sm">
+<table *ngIf="analysisResult" class="table table-dark table-striped-columns table-sm table-hover">
   <thead>
   <tr><th>EV</th><th>Rate / Signature</th><th>GV</th></tr>
   </thead>
   <tbody>
   <tr *ngFor="let rate of analysisResult.rates">
     <td>{{rate.energeticValue}}</td>
-    <td>{{rate.name}}</td>
-    <td>{{rate.gv}}</td>
+    <td *ngIf="rate.url"><a href="{{rate.url}}" target="{{rate.name}}">{{rate.name}}</a></td>
+    <td *ngIf="!rate.url">{{rate.name}}</td>
+    <td *ngIf="rate.gv < 1000">{{rate.gv}}</td>
+    <td *ngIf="rate.gv >= 1000"><span class="badge text-bg-success">{{rate.gv}}</span></td>
   </tr>
   </tbody>
 </table>

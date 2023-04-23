@@ -25,7 +25,12 @@ export class AnalyzeService {
 
         rateList.split(/[\r\n]+/).forEach(r => {
           let rate = new Rate();
-          rate.name = r;
+          if (r.indexOf("\t") > 0) {
+            rate.name = r.split(/[\t]+/)[0];
+            rate.url = r.split(/[\t]+/)[1];
+          } else {
+            rate.name = r;
+          }
 
           rates.push(rate)
         });
