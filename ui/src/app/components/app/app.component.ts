@@ -31,7 +31,8 @@ export class AppComponent {
     return [
       new Link("DASHBOARD", true),
       new Link("UPLOAD", true),
-      new Link("TEST", true)
+      new Link("TEST", true),
+      new Link("SETTINGS", true)
     ]
   }
 

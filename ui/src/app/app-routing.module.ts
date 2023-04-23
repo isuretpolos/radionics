@@ -4,12 +4,14 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {FileUploadComponent} from "./components/file-upload/file-upload.component";
 import {HttpClientModule} from "@angular/common/http";
 import {TestComponent} from "./components/test/test.component";
+import {SettingsComponent} from "./components/settings/settings.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'DASHBOARD', pathMatch: 'full'},
   {path: 'DASHBOARD', component:DashboardComponent},
   {path: 'UPLOAD', component:FileUploadComponent},
   {path: 'TEST', component:TestComponent},
+  {path: 'SETTINGS', component:SettingsComponent},
 ];
 
 @NgModule({

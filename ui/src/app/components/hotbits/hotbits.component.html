@@ -1,4 +1,7 @@
 <video #video autoplay style="display: hidden"></video>
 <canvas #canvas style="display: hidden"></canvas>
 
-<span class="badge rounded-pill text-bg-info">Hotbits: {{hotbitsLength}}</span>
+<button class="btn btn-success btn-sm" (click)="switchCamera()"*ngIf="!cameraOn" >Switch Camera ON</button>
+<button class="btn btn-success btn-sm" (click)="switchCamera()"*ngIf="cameraOn" >Switch Camera OFF</button>
+<span class="badge rounded-pill text-bg-warning" *ngIf="!selectedDevice">No camera selected. Go to settings.</span>
+<span class="badge rounded-pill text-bg-info">Hotbits: {{hotbitsLength}} from source {{selectedDevice}}</span>

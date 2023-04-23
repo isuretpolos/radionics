@@ -9,6 +9,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { TestComponent } from './components/test/test.component';
 import { DisclaimerComponent } from './components/disclaimer/disclaimer.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { DocumentationComponent } from './components/documentation/documentation.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { DisclaimerComponent } from './components/disclaimer/disclaimer.componen
     DashboardComponent,
     FileUploadComponent,
     TestComponent,
-    DisclaimerComponent
+    DisclaimerComponent,
+    SettingsComponent,
+    DocumentationComponent
   ],
   imports: [
     BrowserModule,

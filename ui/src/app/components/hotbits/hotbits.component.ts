@@ -10,29 +10,62 @@ export class HotbitsComponent implements OnInit {
 
   @ViewChild('video') videoElement: ElementRef<HTMLVideoElement>;
   @ViewChild('canvas') canvasElement: ElementRef<HTMLCanvasElement>;
-  lastRandomNumber:number = 0;
-  hotbitsLength:number = 0;
-  constructor(private randomNumbersService:RandomNumberService) { }
+  lastRandomNumber: number = 0;
+  hotbitsLength: number = 0;
+  cameraOn = false;
+  selectedDevice: any;
+
+  constructor(private randomNumberService: RandomNumberService) {
+  }
 
 
   ngOnInit(): void {
+    this.selectedDevice = localStorage.getItem('webCam')
   }
 
   ngAfterViewInit() {
-    this.setupWebcam();
+    document.querySelector('canvas').style.display = "none";
+    document.querySelector('video').style.display = "none";
   }
 
   private async setupWebcam() {
-    document.querySelector('canvas').style.display="none";
-    document.querySelector('video').style.display="none";
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    this.videoElement.nativeElement.srcObject = stream;
-    this.videoElement.nativeElement.play();
-    this.updateCanvas();
 
+    if (!this.selectedDevice) {
+      return
+    }
+
+    let deviceId = this.randomNumberService.devices.filter(device => device.label == this.selectedDevice)[0].deviceId;
+    const constraints = {video: {deviceId: {exact: deviceId}}};
+
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then(stream => {
+        console.log(stream)
+        this.videoElement.nativeElement.srcObject = stream;
+        this.videoElement.nativeElement.play();
+        this.cameraOn = true;
+        this.updateCanvas();
+      })
+      .catch(error => console.error(error));
+  }
+
+  private async stopWebcam() {
+    let deviceId = this.randomNumberService.devices.filter(device => device.label == this.selectedDevice)[0].deviceId;
+    const constraints = {video: {deviceId: {exact: deviceId}}};
+
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then(stream => {
+        console.log("stop webcam")
+        stream.getTracks().forEach(track => track.stop());
+        this.cameraOn = false;
+        stream = null;
+        this.videoElement.nativeElement.srcObject = null;
+      })
+      .catch(error => console.error(error));
   }
 
   private updateCanvas() {
+
+    if (!this.cameraOn) return;
 
     const video = this.videoElement.nativeElement;
     const canvas = this.canvasElement.nativeElement;
@@ -64,14 +97,22 @@ export class HotbitsComponent implements OnInit {
       }
     }
 
-    this.randomNumbersService.addHotbits(randomNumbers);
-    this.hotbitsLength = this.randomNumbersService.hotbits.length;
+    this.randomNumberService.addHotbits(randomNumbers);
+    this.hotbitsLength = this.randomNumberService.hotbits.length;
     requestAnimationFrame(() => this.updateCanvas());
   }
 
   showWebCam() {
-    document.querySelector('canvas').style.display="block";
-    document.querySelector('video').style.display="block";
+    document.querySelector('canvas').style.display = "block";
+    document.querySelector('video').style.display = "block";
   }
 
+  switchCamera() {
+    if (this.cameraOn) {
+      this.stopWebcam();
+      location.reload();
+    } else {
+      this.setupWebcam();
+    }
+  }
 }
