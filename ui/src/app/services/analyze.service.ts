@@ -136,7 +136,7 @@ export class AnalyzeService {
     let hotbitNumber = new Date().getMilliseconds()
 
     if (this.randomNumberService.hotbits.length > 10) {
-      hotbitNumber += this.randomNumberService.hotbits.shift();
+      hotbitNumber = this.randomNumberService.hotbits.shift();
     }
 
     return seedrandom(hotbitNumber);

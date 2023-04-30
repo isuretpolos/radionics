@@ -14,6 +14,8 @@ export class HotbitsComponent implements OnInit {
   hotbitsLength: number = 0;
   cameraOn = false;
   selectedDevice: any;
+  cycle:number = 0;
+  imageDataArray:any[] = [];
 
   constructor(private randomNumberService: RandomNumberService) {
   }
@@ -74,29 +76,67 @@ export class HotbitsComponent implements OnInit {
 
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
-
     const randomNumbers = [];
+    let binaryString = "";
+
+    if (this.cycle == 0) {
+      this.imageDataArray.push(data);
+      this.cycle = 1;
+      requestAnimationFrame(() => this.updateCanvas());
+      return;
+    }
+
+    if (this.cycle == 1) {
+      this.imageDataArray.push(data);
+      this.cycle = 0;
+    }
+
     for (let i = 0; i < data.length; i += 4) {
 
-      const r = data[i];
-      const g = data[i + 1];
-      const b = data[i + 2];
-      const randomValue = ((r << 16) | (g << 8) | b) / (0xffffff + 1);
-      const randomInt = Math.floor(randomValue * Number.MAX_SAFE_INTEGER);
+      const r1 = this.imageDataArray[0][i];
+      const g1 = this.imageDataArray[0][i + 1];
+      const b1 = this.imageDataArray[0][i + 2];
+      const r2 = this.imageDataArray[1][i];
+      const g2 = this.imageDataArray[1][i + 1];
+      const b2 = this.imageDataArray[1][i + 2];
 
-      if (i == 0 && this.lastRandomNumber == randomInt) {
-        break;
+      if (r1 > r2) {
+        binaryString += "1"
+      } else if (r1 < r2) {
+        binaryString += "0"
       }
 
-      if (i == 0) {
-        this.lastRandomNumber = randomInt;
+      if (g1 > g2) {
+        binaryString += "1"
+      } else if (g1 < g2) {
+        binaryString += "0"
       }
 
-      if (randomInt > 0) {
-        randomNumbers.push(randomInt);
+      if (b1 > b2) {
+        binaryString += "1"
+      } else if (b1 < b2) {
+        binaryString += "0"
+      }
+
+      if (binaryString.length >= 30) {
+        let randomInt = parseInt(binaryString.substring(0,32), 2);
+        binaryString = "";
+
+        if (i == 0) {
+          this.lastRandomNumber = randomInt;
+        }
+
+        if (randomInt > 0) {
+          if (this.lastRandomNumber > randomInt) {
+            randomNumbers.push(this.lastRandomNumber - randomInt);
+          } else {
+            randomNumbers.push(this.lastRandomNumber + randomInt);
+          }
+        }
       }
     }
 
+    this.imageDataArray = [];
     this.randomNumberService.addHotbits(randomNumbers);
     this.hotbitsLength = this.randomNumberService.hotbits.length;
     requestAnimationFrame(() => this.updateCanvas());

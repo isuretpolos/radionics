@@ -1,0 +1,12 @@
+<form class="row g-3">
+  <div class="col-auto">
+    <label for="signature" class="visually-hidden">Signature / Rate: </label>
+    <input type="text" class="form-control-plaintext" id="signature" [formControl]="rate">
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-success btn-sm" (click)="broadcast()">BROADCAST</button>
+  </div>
+</form>
+
+
+<div id="analog-clock-canvas"></div>

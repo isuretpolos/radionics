@@ -13,6 +13,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { AnalyzeComponent } from './components/analyze/analyze.component';
 import {NgChartsModule} from "ng2-charts";
+import { BroadcastComponent } from './components/broadcast/broadcast.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,13 +26,15 @@ import {NgChartsModule} from "ng2-charts";
     DisclaimerComponent,
     SettingsComponent,
     DocumentationComponent,
-    AnalyzeComponent
+    AnalyzeComponent,
+    BroadcastComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
-    NgChartsModule
+    NgChartsModule,
+    ReactiveFormsModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
