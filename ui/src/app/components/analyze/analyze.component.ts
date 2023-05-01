@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AnalyzeService} from "../../services/analyze.service";
 import {AnalysisResult} from "../../domains/AnalysisResult";
 import {ChartConfiguration} from "chart.js";
+import {RandomNumberService} from "../../services/random-number.service";
 
 @Component({
   selector: 'app-analyze',
@@ -36,7 +37,9 @@ export class AnalyzeComponent implements OnInit {
     },
   ];
 
-  constructor(private analyzeService: AnalyzeService) {
+  constructor(
+    private analyzeService: AnalyzeService,
+    public randomNumberService: RandomNumberService) {
   }
 
   ngOnInit(): void {
@@ -47,6 +50,12 @@ export class AnalyzeComponent implements OnInit {
         label: 'Analysis Distribution',
       },
     ];
+
+    let lastAnalysis = localStorage.getItem('lastAnalysis');
+    if (lastAnalysis) {
+      this.analysisResult = JSON.parse(lastAnalysis);
+      this.initBubbleChart();
+    }
   }
 
   analyze() {
@@ -56,38 +65,46 @@ export class AnalyzeComponent implements OnInit {
     this.analyzeService.analyze("HOMEOPATHY_Clarke_With_MateriaMedicaUrls.txt").subscribe(r => {
         this.analyzing = false;
         this.analysisResult = r;
-        console.log(r)
-
-        this.bubbleChartDatasets = [
-          {
-            data: [],
-            label: 'Analysis Distribution',
-          },
-        ];
-
-
-
-        this.bubbleChartOptions.scales = {
-          x: {
-            min: this.analysisResult.minGV,
-            max: this.analysisResult.maxGV,
-          },
-          y: {
-            min: this.analysisResult.minEV,
-            max: this.analysisResult.maxEV,
-          }
-        }
-
-        this.analysisResult.rates.forEach(r => {
-          this.bubbleChartDatasets[0].data.push({
-            x: r.gv,
-            y: r.energeticValue,
-            r: (50 / this.analysisResult.maxGV * r.gv)
-          })
-        })
-
+        this.initBubbleChart();
+        localStorage.setItem('lastAnalysis', JSON.stringify(this.analysisResult));
       }
     );
+  }
+
+  initBubbleChart() {
+    this.bubbleChartDatasets = [
+      {
+        data: [],
+        label: 'Analysis Distribution',
+      },
+    ];
+
+    let xMin = this.analysisResult.minGV;
+    let xMax = this.analysisResult.maxGV;
+    let yMin = this.analysisResult.minEV;
+    let yMax = this.analysisResult.maxEV;
+
+    if (xMax < 1000) xMax = 1000;
+    if (yMax < 1000) yMax = 1000;
+
+    this.bubbleChartOptions.scales = {
+      x: {
+        min: xMin,
+        max: xMax
+      },
+      y: {
+        min: yMin,
+        max: yMax
+      }
+    }
+
+    this.analysisResult.rates.forEach(r => {
+      this.bubbleChartDatasets[0].data.push({
+        x: r.gv,
+        y: r.energeticValue,
+        r: (50 / this.analysisResult.maxGV * r.gv)
+      })
+    })
   }
 
   checkGeneralVitality() {

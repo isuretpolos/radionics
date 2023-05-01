@@ -8,6 +8,7 @@ export class RandomNumberService {
 
   hotbits:number[] = [];
   devices:any[] = [];
+  webCamOn:boolean = false;
 
   constructor() {
     navigator.mediaDevices.enumerateDevices().then(devices => {

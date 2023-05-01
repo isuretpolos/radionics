@@ -1,1 +1,8 @@
 button {margin: 0.3rem}
+.table-success {
+  --bs-table-bg: #05310c !important;
+  --bs-table-striped-bg: #063809 !important;
+  background-color: #063809 !important;
+  color: #e7e7e7 !important;
+  font-weight: bolder;
+}

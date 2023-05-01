@@ -50,10 +50,11 @@ export class BroadcastComponent implements OnInit {
         this.pointer = this.pointer + 1;
         if (this.pointer >= 400) this.pointer = 0;
 */
-        let x = this.analyzeService.getRandomNumber(400);
-        let y = this.analyzeService.getRandomNumber(400);
         if (this.rate.value) {
-          s.text(this.rate.value, x,y)
+          let x = this.analyzeService.getRandomNumber(400);
+          let y = this.analyzeService.getRandomNumber(400);
+
+          s.text(this.rate.value, x, y)
         }
 
       };

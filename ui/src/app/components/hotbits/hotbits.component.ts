@@ -45,6 +45,7 @@ export class HotbitsComponent implements OnInit {
         this.videoElement.nativeElement.srcObject = stream;
         this.videoElement.nativeElement.play();
         this.cameraOn = true;
+        this.randomNumberService.webCamOn = true;
         this.updateCanvas();
       })
       .catch(error => console.error(error));
