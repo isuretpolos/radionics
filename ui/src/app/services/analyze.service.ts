@@ -10,6 +10,8 @@ import {AnalysisResult, Rate} from "../domains/AnalysisResult";
 })
 export class AnalyzeService {
 
+  delaying:boolean = false;
+
   constructor(private randomNumberService:RandomNumberService, private http:HttpClient) { }
 
   getRandomNumber(max:number):number {
@@ -44,12 +46,16 @@ export class AnalyzeService {
 
           if (this.randomNumberService.hotbits.length < 10000) {
             console.log(`delay ...  ${this.randomNumberService.hotbits.length}`)
+            this.delaying = true;
             await this.delay(1000);
+            this.delaying = false;
           } else {
             for (const rate of rates) {
               if (this.randomNumberService.hotbits.length < 10000) {
                 console.log(`delay again ...  ${this.randomNumberService.hotbits.length}`)
+                this.delaying = true;
                 await this.delay(1000);
+                this.delaying = false;
               }
               rate.energeticValue += this.getRandomNumber(10);
               if (rate.energeticValue > analysisResult.maxEV) {

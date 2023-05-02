@@ -38,7 +38,7 @@ export class AnalyzeComponent implements OnInit {
   ];
 
   constructor(
-    private analyzeService: AnalyzeService,
+    public analyzeService: AnalyzeService,
     public randomNumberService: RandomNumberService) {
   }
 

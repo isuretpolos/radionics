@@ -128,11 +128,7 @@ export class HotbitsComponent implements OnInit {
         }
 
         if (randomInt > 0) {
-          if (this.lastRandomNumber > randomInt) {
-            randomNumbers.push(this.lastRandomNumber - randomInt);
-          } else {
-            randomNumbers.push(this.lastRandomNumber + randomInt);
-          }
+            randomNumbers.push(randomInt);
         }
       }
     }

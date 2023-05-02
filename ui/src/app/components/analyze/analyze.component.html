@@ -1,9 +1,15 @@
 <div *ngIf="randomNumberService.webCamOn">
   <button class="btn btn-primary" (click)="analyze()">ANALYZE</button>
   <button class="btn btn-primary" (click)="checkGeneralVitality()">GV {{gv}}</button>
-  <span *ngIf="analyzing" class="badge badge-primary">analyzing ... please wait</span>
+  <div *ngIf="analyzing" class="spinner-border text-light" role="status">
+    <span class="visually-hidden"> analyzing ... please wait</span>
+  </div>
+  <div *ngIf="analyzeService.delaying" class="spinner-grow text-danger" style="width: 3rem; height: 3rem;" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
   <hr>
 </div>
+
 <div *ngIf="!randomNumberService.webCamOn">
   Switch webCam on if you want to analyze
 </div>
