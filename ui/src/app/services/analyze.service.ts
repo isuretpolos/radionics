@@ -12,6 +12,9 @@ export class AnalyzeService {
 
   delaying:boolean = false;
 
+  mouseX: number;
+  mouseY: number;
+
   constructor(private randomNumberService:RandomNumberService, private http:HttpClient) { }
 
   getRandomNumber(max:number):number {
@@ -139,12 +142,17 @@ export class AnalyzeService {
    * Consuming hotbits for quantum influence
    */
   private getRnd() {
-    let hotbitNumber = new Date().getMilliseconds()
-
+    let hotbitNumber = Date.now();
+    console.log(hotbitNumber)
     if (this.randomNumberService.hotbits.length > 10) {
-      hotbitNumber = this.randomNumberService.hotbits.shift();
+      hotbitNumber += this.randomNumberService.hotbits.shift();
+    }
+    // at additional sources of randomness
+    if (this.mouseX && this.mouseY) {
+      hotbitNumber += this.mouseX + this.mouseY;
     }
 
+    console.log(hotbitNumber)
     return seedrandom(hotbitNumber);
   }
 }

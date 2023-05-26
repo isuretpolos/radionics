@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {Link} from "../../domains/Link";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NavigationService} from "../../services/navigation.service";
+import {AnalyzeService} from "../../services/analyze.service";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private navigationService:NavigationService
+    private navigationService:NavigationService,
+    public analyzeService: AnalyzeService
   ) {
 
     let currentUrl = window.location.href;
@@ -25,6 +27,12 @@ export class AppComponent {
     this.navigationService.navigate.subscribe( (url:string) => {
       this.navigate(url);
     });
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(event: MouseEvent) {
+    this.analyzeService.mouseX = event.clientX;
+    this.analyzeService.mouseY = event.clientY;
   }
 
   private getLinks():Link[] {

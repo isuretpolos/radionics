@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {RandomNumberService} from "../../services/random-number.service";
 
 @Component({
@@ -19,7 +19,6 @@ export class HotbitsComponent implements OnInit {
 
   constructor(private randomNumberService: RandomNumberService) {
   }
-
 
   ngOnInit(): void {
     this.selectedDevice = localStorage.getItem('webCam')
