@@ -1,0 +1,10 @@
+<form class="row g-3">
+  <div class="col-auto">
+    <label for="signature" class="visually-hidden">Signature / Rate: </label>
+    <input type="text" class="form-control-plaintext" id="signature" (keyup)="transformToRate()" [formControl]="signature">
+  </div>
+</form>
+<div>
+  <h3>Base 10</h3>
+  <button class="btn btn-primary btn-sm" *ngFor="let n of rateBase10">{{n}}</button>
+</div>

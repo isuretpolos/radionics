@@ -15,6 +15,7 @@ import { AnalyzeComponent } from './components/analyze/analyze.component';
 import {NgChartsModule} from "ng2-charts";
 import { BroadcastComponent } from './components/broadcast/broadcast.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { RatesComponent } from './components/rates/rates.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     SettingsComponent,
     DocumentationComponent,
     AnalyzeComponent,
-    BroadcastComponent
+    BroadcastComponent,
+    RatesComponent
   ],
   imports: [
     BrowserModule,
